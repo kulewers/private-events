@@ -1,0 +1,27 @@
+<h1>Current Events</h1>
+
+<ul>
+  <% @events.upcoming.each do |event| %>
+    <li>
+      <%= link_to event.title, event %>
+      <p>Hosted by: 
+        <%= link_to event.host.username, event.host %>
+      </p>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Create Event", new_event_path %>
+
+<h2>Past Events</h2>
+
+<ul>
+  <% @events.past.each do |event| %>
+    <li>
+      <%= link_to event.title, event %>
+      <p>Hosted by: 
+        <%= link_to event.host.username, event.host %>
+      </p>
+    </li>
+  <% end %>
+</ul>

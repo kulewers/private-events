@@ -1,0 +1,50 @@
+<h1><%= @event.title %></h1>
+
+<h3>Description: </h3>
+
+<p><%= @event.description %></p>
+
+<h3>Location: </h3>
+
+<p><%= @event.location %></p>
+
+<h3>Date and Time: </h3>
+
+<p><%= @event.date %></p>
+
+<p>Hosted by: 
+<%= link_to @event.host.username, @event.host %>
+</p>
+
+<p>
+  <% if @event.date > Time.now %>
+    <% if current_user %>
+      <% unless current_user == @event.host %>
+        <% if current_user.attended_events.where(id: @event.id).present? %>
+          You are signed up for the event!
+        <% else %>
+          <%= render partial: 'event_attendances/form', locals: { event: @event } %>
+        <% end %>
+      <% end %>
+    <% else %>
+      Sign in or create an accout to sign up to events
+    <% end %>
+  <% else %>
+    This is a past event.
+  <% end %>
+</p>
+
+<p>List of users attending this event:</p>
+
+<ul>
+  <% attendees = @event.attendees %>
+  <% if attendees.empty? %>
+    This event doesn't have any attendees.
+  <% else %>
+    <% attendees.each do |attendee| %>
+      <li>
+        <%= link_to attendee.username, attendee %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

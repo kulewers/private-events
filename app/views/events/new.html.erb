@@ -1,0 +1,21 @@
+<h1>Register an event</h1>
+
+<%= form_with model: @event do |form| %>
+  <%= form.label :title, "Event title:" %>
+  <br>
+  <%= form.text_field :title %>
+  <br>
+  <%= form.label :description, "Describe your event:" %>
+  <br>
+  <%= form.text_area :description %>
+  <br>
+  <%= form.label :location, "Location:" %>
+  <br>
+  <%= form.text_field :location %>
+  <br>
+  <%= form.label :date, "When does it take place:" %>
+  <br>
+  <%= form.datetime_local_field :date %>
+  <br>
+  <%= form.submit %>
+<% end %>

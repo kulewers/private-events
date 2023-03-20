@@ -1,0 +1,53 @@
+<h1>Profile: <%= @user.username %></h1>
+
+<h2>Events hosted by <%= @user.username %>:</h2>
+
+<ul>
+  <% hosted_events = @user.hosted_events %>
+  <% if hosted_events.empty? %>
+    This user doesn't have any hosted events.
+  <% else %>
+    <% hosted_events.each do |event| %>
+      <li>
+        <%= link_to event.title, event %>
+        <p>Description: </p>
+        <h3><%= event.description %></h3>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<h2>Events attended by <%= @user.username %>:</h2>
+<% attended_events = @user.attended_events %>
+<% if attended_events.empty? %>
+  This user doesn't have any attended events.
+<% else %>
+  <% unless attended_events.past.empty? %>
+    <h3>
+      Past events:
+    </h3>
+    <ul>
+      <% attended_events.past.each do |event| %>
+        <li>
+          <%= link_to event.title, event %>
+          <p>Description: </p>
+          <h3><%= event.description %></h3>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% unless attended_events.upcoming.empty? %>
+    <h3>
+      Upcoming events:
+    </h3>
+    <ul>
+      <% attended_events.upcoming.each do |event| %>
+        <li>
+          <%= link_to event.title, event %>
+          <p>Description: </p>
+          <h3><%= event.description %></h3>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
